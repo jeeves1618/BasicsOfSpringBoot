@@ -1,0 +1,23 @@
+#Overriding the default Port
+server:
+  port: 8081
+
+#Set up H2 Database Connections
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  properties:
+    hibernate:
+      format-sql: true
+      generate-ddl: true
+  datasource:
+    url: jdbc:h2:mem:cricketdb
+    username: h2
+    password: adminuser
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console

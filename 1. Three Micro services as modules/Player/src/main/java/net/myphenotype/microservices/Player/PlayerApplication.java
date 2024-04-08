@@ -2,12 +2,13 @@ package net.myphenotype.microservices.Player;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-public class MicroservicesForManagingPlayersInIplApplication {
+@EnableJpaAuditing(auditorAwareRef = "AuditorAwareImpl")
+public class PlayerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroservicesForManagingPlayersInIplApplication.class, args);
+		SpringApplication.run(PlayerApplication.class, args);
 	}
-
 }

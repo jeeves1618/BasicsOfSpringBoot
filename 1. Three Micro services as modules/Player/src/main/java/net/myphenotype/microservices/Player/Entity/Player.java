@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Player {
+public class Player extends  BaseEntity {
     @Id
     private int playerId;
     private String playerName;

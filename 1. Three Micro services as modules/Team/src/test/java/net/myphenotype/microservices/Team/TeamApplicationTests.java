@@ -1,10 +1,10 @@
-package net.myphenotype.microservices.Player;
+package net.myphenotype.microservices.Team;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MicroservicesForManagingPlayersInIplApplicationTests {
+class TeamApplicationTests {
 
 	@Test
 	void contextLoads() {

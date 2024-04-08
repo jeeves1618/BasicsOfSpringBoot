@@ -1,6 +1,6 @@
 #Overriding the default Port
 server:
-  port: 8081
+  port: 8082
 
 #Set up H2 Database Connections
 spring:
@@ -13,7 +13,7 @@ spring:
       format-sql: true
       generate-ddl: true
   datasource:
-    url: jdbc:h2:file:~/cricketPlayerdb
+    url: jdbc:h2:file:~/cricketTeamdb
     username: h2
     password: adminuser
     driver-class-name: org.h2.Driver

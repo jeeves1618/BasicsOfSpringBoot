@@ -1,23 +1,8 @@
-#Overriding the default Port
-server:
-  port: 8083
-
-#Set up H2 Database Connections
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-  properties:
-    hibernate:
-      format-sql: true
-      generate-ddl: true
-  datasource:
-    url: jdbc:h2:file:~/cricketGrounddb
-    username: h2
-    password: adminuser
-    driver-class-name: org.h2.Driver
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+  application:
+    name: "application"
+  profiles:
+    active: "ground"
+  config:
+    import: "configserver:http://localhost:8071/"
+    #configserver should be configserver irrespective of the config server application name

@@ -1,0 +1,78 @@
+services:
+  config:
+    image: vjponnusamy/basics-config:v1
+    container_name: config-microservice
+    ports:
+      - "8071:8071"
+    healthcheck:
+      #This command will run only once.
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      #If the config server is down for the first time retry for the next 10 times based on the interval specified below
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      #So we are specifying the test to start after 10 seconds
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+    networks:
+      - springbasics
+  ground:
+    image: vjponnusamy/basics-ground:v1
+    container_name: ground-microservice
+    ports:
+      - "8083:8083"
+    depends_on:
+      config:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+    networks:
+      - springbasics
+    environment:
+      SPRING_APPLICATION_NAME: "application"
+      SPRING_CONFIG_IMPORT: "configserver:http://config:8071/"
+      SPRING_PROFILES_ACTIVE: ground
+  player:
+    image: vjponnusamy/basics-player:v1
+    container_name: player-microservice
+    ports:
+      - "8081:8081"
+    depends_on:
+      config:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+    networks:
+      - springbasics
+    environment:
+      SPRING_APPLICATION_NAME: "application"
+      SPRING_CONFIG_IMPORT: "configserver:http://config:8071/"
+      SPRING_PROFILES_ACTIVE: player
+  team:
+    image: vjponnusamy/basics-team:v1
+    container_name: team-microservice
+    ports:
+      - "8082:8082"
+    depends_on:
+      config:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+    networks:
+      - springbasics
+    environment:
+      SPRING_APPLICATION_NAME: "application"
+      SPRING_CONFIG_IMPORT: "configserver:http://config:8071/"
+      SPRING_PROFILES_ACTIVE: team
+networks:
+  springbasics:
+    driver: "bridge"

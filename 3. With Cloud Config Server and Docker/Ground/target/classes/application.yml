@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: "application"
+  profiles:
+    active: "ground"
+  config:
+    import: "configserver:http://localhost:8071/"
+    #configserver should be configserver irrespective of the config server application name

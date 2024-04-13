@@ -4,5 +4,5 @@ spring:
   profiles:
     active: "ground"
   config:
-    import: "configserver:http://localhost:8071/"
+    import: "optional:configserver:http://config:8071/"
     #configserver should be configserver irrespective of the config server application name

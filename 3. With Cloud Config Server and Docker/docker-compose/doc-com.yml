@@ -6,7 +6,7 @@ services:
       - "8071:8071"
     healthcheck:
       #This command will run only once.
-      test: "curl http://localhost:8071/actuator/health/readiness | findstr UP || echo UP"
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
       #If the config server is down for the first time retry for the next 10 times based on the interval specified below
       interval: 10s
       timeout: 5s

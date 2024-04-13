@@ -4,5 +4,7 @@ spring:
   profiles:
     active: "player"
   config:
-    import: "configserver:http://localhost:8071/"
+    #import: "configserver:http://localhost:8071/" is not working because it is not getting overridden by
+    #SPRING_CONFIG_IMPORT: "configserver:http://config:8071/" from the docker file
+    import: "optional:configserver:http://config:8071/"
     #configserver should be configserver irrespective of the config server application name
